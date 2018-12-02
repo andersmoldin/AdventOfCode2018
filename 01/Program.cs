@@ -23,7 +23,7 @@ namespace _01
         private static int Part2(IEnumerable<string> changes)
         {
             var frequencyLog = new HashSet<int>();
-            var frequency = 0;
+            int frequency = 0;
 
             while (true)
             {
