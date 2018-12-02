@@ -6,7 +6,7 @@ namespace AdventOfCode2018
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Merry christmas!");
         }
     }
 }
