@@ -9,8 +9,7 @@ namespace _02
     {
         static void Main(string[] args)
         {
-            //var input = File.ReadLines("input.txt");
-            List<string> input = new List<string> {"abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab" };
+            var input = File.ReadLines("input.txt");
 
             Console.WriteLine($"Part 1: {Part1(input)}");
             Console.WriteLine($"Part 2: {Part2(input)}");
@@ -45,9 +44,21 @@ namespace _02
             #endregion
         }
 
-        private static int Part2(IEnumerable<string> boxIds)
+        private static string Part2(IEnumerable<string> boxIds)
         {
-            return -1;
+            var ids = boxIds.Distinct().ToList();
+
+            for (int i = 0; i < ids[0].Length; i++)
+            {
+                var pair = ids.Select(id => id.Remove(i, 1)).GroupBy(id => id).FirstOrDefault(g => g.Count() > 1);
+                if (pair != null)
+                {
+                    var common = pair.First();
+                    return common;
+                }
+            }
+
+            return null;
         }
     }
 }
