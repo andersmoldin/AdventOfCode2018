@@ -17,6 +17,8 @@ namespace _06
 
         private static int Part1(List<string> input)
         {
+
+
             return -1;
         }
 
