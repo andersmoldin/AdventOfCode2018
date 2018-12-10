@@ -16,12 +16,12 @@ namespace _07
             Console.WriteLine($"Part 2: {Part2(input)}");
         }
 
-        private static int Part1(string input)
+        private static string Part1(string input)
         {
             Regex regex = new Regex("Step (?<first>[A-Z]) must be finished before step (?<second>[A-Z]) can begin.");
             MatchCollection matchCollection = regex.Matches(input);
 
-            var instructions = new HashSet<int>();
+            var instructions = new Dictionary<int, List<int>>();
 
             foreach (Match match in matchCollection)
             {
@@ -36,22 +36,35 @@ namespace _07
                 {
                     instructions[second].Add(first);
                 }
-
-                foreach (var instruction in instructions)
-                {
-                    Console.WriteLine($"{instruction.Key} ({(char)instruction.Key})");
-
-                    //foreach (var number in instruction.Value)
-                    //{
-                    //    Console.WriteLine($" {number} ({(char)number})");
-                    //}
-                }
-
-                //Console.WriteLine($"{first} ({(char)first}) before {second} ({(char)second})");
-                //Console.WriteLine($"{match.Groups["first"].Value} before {match.Groups["second"].Value}");
             }
 
-            return -1;
+            //var order = DetermineTheOrder(instructions).ToString();
+
+            //Console.WriteLine($"{first} ({(char)first}) before {second} ({(char)second})");
+            //Console.WriteLine($"{match.Groups["first"].Value} before {match.Groups["second"].Value}");
+
+            foreach (var instruction in instructions)
+            {
+                Console.WriteLine($"{instruction.Key} ({(char)instruction.Key})");
+
+                foreach (var number in instruction.Value)
+                {
+                    Console.WriteLine($" {number} ({(char)number})");
+                }
+            }
+
+            return null; //order;
+        }
+
+        private static char[] DetermineTheOrder(Dictionary<int, List<int>> instructions)
+        {
+            var currentOrder = new List<int>();
+
+            var nextStep = instructions.Where(s => s.Value.Any(ss => ss < ((int)'Z') + 1)).OrderBy(s => s.Key).Min(s => s.Value).SingleOrDefault();
+
+
+
+            return currentOrder.Select(i => (char)i).ToArray();
         }
 
         private static int Part2(string input)
