@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace _05
 {
@@ -8,7 +10,6 @@ namespace _05
         static void Main(string[] args)
         {
             var input = File.ReadAllText("input.txt");
-            //var input = "dabAcCaCBAcCcaDA";
 
             Console.WriteLine($"Part 1: {Part1(input)}");
             Console.WriteLine($"Part 2: {Part2(input)}");
@@ -53,6 +54,7 @@ namespace _05
 
             for (int i = 65; i <= 90; i++)
             {
+                stillHeterozygots = true;
                 temp = input.Replace(((char)i).ToString(), "").Replace(((char)(i + 32)).ToString(), "");
 
                 while (stillHeterozygots)
@@ -80,7 +82,7 @@ namespace _05
                 results.Add((char)i, temp.Length);
             }
 
-            return -1;
+            return results.Min(r => r.Value);
         }
 
     }
